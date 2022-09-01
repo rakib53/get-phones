@@ -4,7 +4,9 @@ const loadPhones = () => {
 
      fetch(url)
           .then((res) => res.json())
-          .then((data) => displayPhones(data.data));
+          .then((data) => {
+               displayPhones(data.data);
+          });
 };
 
 const displayPhones = (data) => {
@@ -61,31 +63,41 @@ const displayPhones = (data) => {
                     </tr>
                     <tr>
                          <td>WLAN</td>
-                         <td>${data.others.WLAN}</td>
+                         <td>${
+                              data.others ? data.others.WLAN : "not specified"
+                         }</td>
                     </tr>
                     <tr>
                          <td>Bluethoot</td>
-                         <td>${data.others.Bluetooth}</td>
+                         <td>${
+                              data.others
+                                   ? data.others.Bluetooth
+                                   : "not specified"
+                         }</td>
                     </tr>
                     <tr>
                          <td>GPS</td>
-                         <td>${data.others.GPS}</td>
+                         <td>${
+                              data.others ? data.others.GPS : "not specified"
+                         }</td>
                     </tr>
                     <tr>
                          <td>NFC</td>
-                         <td>${data.others.NFC}</td>
+                         <td>${
+                              data.others ? data.others.NFC : "not specified"
+                         }</td>
                     </tr>
                     <tr>
                          <td>Radio</td>
-                         <td>${data.others.Radio}</td>
+                         <td>${
+                              data.others ? data.others.Radio : "not specified"
+                         }</td>
                     </tr>
             </table>
      `;
 
      displayPhons.appendChild(newElement);
      displayPhons.appendChild(newTableElement);
-
-     console.log(data);
 };
 
 loadPhones();

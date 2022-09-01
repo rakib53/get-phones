@@ -12,7 +12,7 @@ const loadSearchedPhones = async (searchPhone) => {
 
      const getPhones = await fetch(url);
      const data = await getPhones.json();
-     newSearch(data.data);
+     newSearch(data.data, searchPhone);
 };
 
 const displayPhones = (data) => {
@@ -57,23 +57,32 @@ const getSearch = () => {
      loadSearchedPhones(inputValue);
 };
 
-const newSearch = (data) => {
+const newSearch = (data, value) => {
      const phoneContainer = document.querySelector(".phone-containers");
+     const notFoundMessage = document.getElementById("not-found-message");
+     const inputValue = document.getElementById("inputValue");
 
-     data.forEach((data) => {
-          const newDiv = document.createElement("div");
-          newDiv.classList.add("phone-card");
-
-          newDiv.innerHTML = `
-          
-          <img src="${data.image}" alt="" />
-          <h3>${data.phone_name}</h3>
-          <button onclick="getSlug('${data.slug}')">Show details</button>
-          
-          `;
-
-          phoneContainer.appendChild(newDiv);
-     });
+     if (data.length === 0) {
+          phoneContainer.innerHTML = "";
+          notFoundMessage.style.display = "block";
+          inputValue.innerHTML = `"${value}"`;
+          return;
+     } else {
+          notFoundMessage.style.display = "none";
+          phoneContainer.innerHTML = "";
+          data.forEach((data) => {
+               const newDiv = document.createElement("div");
+               newDiv.classList.add("phone-card");
+               newDiv.innerHTML = `
+               
+               <img src="${data.image}" alt="" />
+               <h3>${data.phone_name}</h3>
+               <button onclick="getSlug('${data.slug}')">Show details</button>
+               
+               `;
+               phoneContainer.appendChild(newDiv);
+          });
+     }
 };
 
 document.getElementById("search")?.addEventListener("click", getSearch);

@@ -170,6 +170,33 @@ table th {
      border: 2px solid black;
 }
 
-/* table td {
-     border: 1px solid red;
-} */
+#not-found-message {
+     text-align: center;
+     color: red;
+}
+
+.not-found-message {
+     display: none;
+}
+
+@media screen and (max-width: 966px) {
+     .phone-containers {
+          grid-template-columns: repeat(4, 1fr);
+     }
+     .phone-container-wrapper {
+          padding: 10px 40px;
+     }
+     .phone-container {
+          grid-template-columns: repeat(2, 1fr);
+     }
+}
+
+@media screen and (max-width: 566px) {
+     .phone-containers {
+          grid-template-columns: repeat(2, 1fr);
+     }
+     .phone-container {
+          padding: 10px 40px;
+          grid-template-columns: repeat(1, 1fr);
+     }
+}
